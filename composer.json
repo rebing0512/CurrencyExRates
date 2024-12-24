@@ -1,0 +1,22 @@
+{
+    "name": "jenson0512/currencyexrates",
+    "description": "Jenson Currency Exchange Rates Packages",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jenson Wang",
+            "email": "rebing0512@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2.0",
+        "catfan/medoo": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jenson\\Currency\\": "src/"
+        }
+    }
+}

@@ -32,4 +32,8 @@ composer require jenson0512/currencyexrates
   $data = $currency->getCurrencyRates($pamars);
       
   ```
+  
+## 数据库
+* 1、执行Database目录中create_table.txt中的sql创建数据表
+* 2、然后再执行Database目录中的currency_code.sql文件添加数据
 

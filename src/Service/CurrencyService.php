@@ -44,7 +44,7 @@ class CurrencyService
   
     /**
      * 获取汇率
-     * @params   amount,from,to
+     * @params   amount:默认100,from：默认美元,to：默认人民币
      * @author   Jenson
      * @blog    http://jenson.gg/
      * @version 1.0.0

@@ -24,8 +24,16 @@ require_once('../Extends/simplehtmldom/simple_html_dom.php');
  */
 class CurrencyService
 {
+    // 接口域名
     private static $url = 'http://www.webmasterhome.cn';
+    // 接口地址
     private static $api = '/huilv/huilvchaxun.asp';
+    // 默认页码
+    private static $page = 1;
+    // 每页数量
+    private static $page_size = 20;
+    // 数据库表名
+    private static $table = 'currency_code';
     /**
      * 构造函数
      */
@@ -41,15 +49,16 @@ class CurrencyService
      * @blog    http://jenson.gg/
      * @version 1.0.0
      * @date    2024-12-24
-     * @desc    description
+     * @desc    默认100美元，美元兑人民币汇率
+     * @return  array
      */
     public function getCurrencyRates($params = [])
     {
         $url = self::$url;
         $api = self::$api;
-        $amount = $params['amount']??1;
-        $from = $params['from']??'CNY';
-        $to = $params['to']??'USD';
+        $amount = $params['amount']??100;
+        $from = $params['from']??'USD';
+        $to = $params['to']??'CNY';
         $apiUrl = $url.$api.'?amount='.$amount.'&from='.$from.'&to='.$to;
         $data = file_get_html($apiUrl)->plaintext;
         $arr = explode(',',$data);
@@ -67,20 +76,32 @@ class CurrencyService
 
     /**
      * 获取货币列表
+     * @params   page,page_size
      * @author   Jenson
      * @blog    http://jenson.gg/
      * @version 1.0.0
      * @date    2024-12-24
-     * @desc    description
+     * @desc    默认获取全部数据，获取分页数据，入参需要分页参数（默认第1页，20条数据）
+     * @return  array
      */
     public function getCurrencyList($params = [])
     {
         $db = new DB();
         $database = $db->database;
-        $table = 'currency_code';
+        $table = self::$table;
         $where = [
-            ['status','=',1]
+            'status'=>1
         ];
+        if(isset($params['page'])){
+            $page = $params['page']?:self::$page;
+            $page_size = $params['page_size']??self::$page_size;
+            $limit_start = ($page - 1)*$page_size ;
+            $limit = [$limit_start,$page_size];
+            $where = [
+                'status'=>1,
+                "LIMIT" => $limit
+            ];
+        }
         $columns = [
             'code','en_name','cn_name'
         ];

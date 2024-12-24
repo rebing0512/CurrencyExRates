@@ -25,10 +25,10 @@ class Helper
      * @date: 2024-12-24
      * @desc: currency list
      */
-    public static function getCurrencyList()
+    public static function getCurrencyList($params = [])
     {
         $service = new CurrencyService();
-        $data = $service->getCurrencyList();
+        $data = $service->getCurrencyList($params);
         return $data;
     }
 
@@ -38,10 +38,10 @@ class Helper
      * @date: 2024-12-24
      * @desc: currency info
      */
-    public static function getCurrencyRates($pamars = [])
+    public static function getCurrencyRates($params = [])
     {
         $service = new CurrencyService();
-        $data = $service->getCurrencyRates($pamars);
+        $data = $service->getCurrencyRates($params);
         return $data;
     }
 }

@@ -8,6 +8,9 @@ class DB
 {
     public $database;
 
+    /**
+     * 构造函数
+     */
     public function __construct()
     {
         $this->database = new medoo([

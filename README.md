@@ -15,7 +15,7 @@ composer require jenson0512/currencyexrates
     $currency = new CHelper();
         $pamars = [
             'page'        => 1,      #分页,默认1，非必填
-            'page_saze'   => 'USD',  #每页数量默认20，非必填
+            'page_saze'   => 20,  #每页数量默认20，非必填
         ];
     $data = $currency->getCurrencyList($pamars);
     

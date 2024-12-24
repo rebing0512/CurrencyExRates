@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenson\Currency\Helper;
+namespace Jenson\Currency\Helpers;
 
 use Medoo\Medoo;
 

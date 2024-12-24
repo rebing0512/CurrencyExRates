@@ -13,7 +13,7 @@ namespace Jenson\Currency\Service;
 use Jenson\Currency\Helpers\DB;
 use Jenson\Currency\Helpers\Helper;
 
-require_once(__DIR__ . '/../simplehtmldom/simple_html_dom.php');
+require_once(__DIR__ . '/../Extends/simplehtmldom/simple_html_dom.php');
 
 /**
  * 服务层

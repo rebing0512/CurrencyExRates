@@ -57,6 +57,7 @@ class CurrencyService
         $url = self::$url;
         $api = self::$api;
         $amount = $params['amount']??100;
+        #正向汇率
         $from = $params['from']??'USD';
         $to = $params['to']??'CNY';
         $apiUrl = $url.$api.'?amount='.$amount.'&from='.$from.'&to='.$to;
@@ -71,7 +72,26 @@ class CurrencyService
             'desc'=>$rate_name,
             'rate'=>$numbers[0]
         ];
-        return Helper::DataReturn('ok',200,$res);
+        #逆向汇率
+        $from = $params['to']??'CNY';
+        $to = $params['from']??'USD';
+        $apiUrl = $url.$api.'?amount='.$amount.'&from='.$from.'&to='.$to;
+        $data = file_get_html($apiUrl)->plaintext;
+        $arr = explode(',',$data);
+        $rate_name = trim($arr[0]);
+        $rate_str = $arr[1];
+        $pattern = '/[\d]+(\.[\d]+)?/';
+        preg_match_all($pattern, $rate_str, $matches);
+        $numbers = $matches[0];
+        $res_reverse = [
+            'desc'=>$rate_name,
+            'rate'=>$numbers[0]
+        ];
+        $data = [
+            'forward'=>$res,
+            'reverse'=>$res_reverse
+        ];
+        return Helper::DataReturn('ok',200,$data);
     }
 
     /**
